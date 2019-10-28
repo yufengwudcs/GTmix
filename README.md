@@ -3,9 +3,12 @@ Inference of population admixture network from local gene genealogies under coal
 
 GTmix is a computer program for inferring population admixture networks from inferred local gene genealogies. If you use GTmix, please cite:
 
-Accurate and Efficient Cell Lineage Tree Inference from Noisy Single Cell Data: the Maximum Likelihood Perfect Phylogeny Approach, Yufeng Wu, manuscript, 2019.
+Inference of Population Admixture Network from Local Gene Genealogies: a Coalescent-based Maximum Likelihood Approach, Yufeng Wu, manuscript, 2019.
 
-The key feature of ScisTree is that it works with uncertain genotypes with individualized probability. That is, you can specify for each genotype (at a row/cell or column/site) different probabilities of being a particular genotype state. ScisTree allows both binary or ternary genotypes. Here is an example for binary genotypes. Note: don't include blank rows in the input genotype file.
+Population admixture network is a model for population evolution. Admixture network models population divergence and admixture. Existing methods for inferring population admixture network includes TreeMix (Pickrell and Pritchard, 2012).
+
+The key feature of GTmix is that it works with local gene genealogies inferred from haplotypes. Existing methods for admixture network inference (e.g., Treemix) uses single-site genetic variations. While these methods are very fast, they may lose important linkage disequilibrum (LD) information. GTmix works with inferred local gene genealogies from haplotypes. Local genealogies contain LD information. GTmix performs maximum likelihood inference of admixture networks from local genealogies based on the so-called "multispecies coalescent" model. My tests show that GTmix is slower than TreeMix. However, GTmix can infer more accurate networks than TreeMix even when GTmix only uses a small fraction of data compared to those used by TreeMix.
+
 
 This is an example for binary genotypes (don't leave blank lines between rows; the blank lines here are meant to improve readability).
 
