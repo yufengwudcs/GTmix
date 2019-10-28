@@ -10,54 +10,40 @@ Population admixture network is a model for population evolution. Admixture netw
 The key feature of GTmix is that it works with local gene genealogies inferred from haplotypes. Existing methods for admixture network inference (e.g., Treemix) uses single-site genetic variations. While these methods are very fast, they may lose important linkage disequilibrum (LD) information. GTmix works with inferred local gene genealogies from haplotypes. Local genealogies contain LD information. GTmix performs maximum likelihood inference of admixture networks from local genealogies based on the so-called "multispecies coalescent" model. My tests show that GTmix is slower than TreeMix. However, GTmix can infer more accurate networks than TreeMix even when GTmix only uses a small fraction of data compared to those used by TreeMix.
 
 
-This is an example for binary genotypes (don't leave blank lines between rows; the blank lines here are meant to improve readability).
+There are two files needed to run GTmix. First, you need a file containing the local gene genealogies. Here is what is in the given example file (test-mat-2.hap.trees):
 
-HAPLOID 5 4 c1 c2 c3 c4 c5
+0       ((((2,6),8),(1,5)),((4,7),3))
+1       ((((((1,7),3),(2,6)),5),8),4)
+2       (((((1,5),7),(2,8)),6),(3,4))
+3       (((((1,5),3),7),((6,8),2)),4)
+4       (((((1,5),3),7),((6,8),2)),4)
+5       (((((1,5),(2,4)),7),(6,8)),3)
+6       ((((1,5),7),(2,4)),((6,8),3))
+7       ((((1,5),2),((4,7),3)),(6,8))
+8       (((((6,8),1),4),((2,5),7)),3)
+9       ((((6,8),1),(3,7)),((2,5),4))
+10      ((((2,5),4),7),(((6,8),1),3))
 
-s1 0.8 0.02 0.8 0.8
+Note that the first column (index from 0 to 10) is optional; it is included here mainly because we use the program RENT+ to infer the gene genealogies; RENT+ outputs a tree index in its genealogy inference output. 
 
-s2 0.02 0.02 0.02 0.8
+The second file you need is a file describing the sampled haplotypes and populations. For example, here is what is in the given example file (listPopInfo-p4-a2.txt):
 
-s3 0.8 0.02 0.02 0.8
+A 2 1 2 
+B 2 3 4 
+C 2 5 6 
+D 2 7 8
 
-s4 0.02 0.8 0.8 0.8
+Here, each population is one row. The first column specifies the population name. The second column is the number of sampled haplotypes in the population. The following columns specify the haplotypes for this population (should match the taxa in the genealogies).
 
-s5 0.8 0.02 0.8 0.02
+Once you have the executable for GTmix, simple type to run:
 
-The first line specifies the type of genotypes (HAPLOID or TERNARY), number of sites and number of cells, along with cell names. Lines started with # are ignored by ScisTree. You should have one line for each site. For each line, it starts with the site name; then it follows by the probability of being genotype 0 (for binary genotypes) or being 0 and 1 (consecutively for ternary genotypes) for each cells. For example, in the above example, the first 0.8 on the first row means this genotype is equal to 0 with probability 0.8. Here is an example for ternary genotypes.
+./gtmix -P listPopInfo-p4-a2.txt test-mat-2.hap.trees 
 
-This is an example for ternary genotypes.
+This would infer a population admixture network based on maximum likelihood. The inferred network is output (as a list of population trees contained in the network, and also as a graph in GML format, with default name being optimal-network.gml).
 
-TERNARY 5 4 c1 c2 c3 c4
+Refer to the user manual for more details on how to use GTmix.
 
-s1 0.8 0.05 0.02 0.1 0.8 0.05 0.8 0.01
 
-s2 0.02 0.1 0.02 0.15 0.02 0.05 0.8 0.1
+# About source code release
+I plan to release the source of GTmix sometime soon. For now, I provide executables for Mac and Linux (64 bits) for evaluation.
 
-s3 0.8 0.1 0.02 0.1 0.02 0.15 0.8 0.1
-
-s4 0.02 0.1 0.8 0.05 0.8 0.15 0.8 0.1
-
-s5 0.8 0.1 0.02 0.1 0.8 0.15 0.02 0.1
-
-Here, the first 0.8 and 0.05 on the first row mean the genotype of the first cell has probability 0.8 of being 0, and probability 0.05 of being 1 (and thus probability of 0.15 being genotype 2).
-
-Once you have the executable for ScisTree, simple type to run:
-
-./scistree example.dat
-
-This would infer a cell tree based on maximum likelihood. If you want to impute the genotypes, type:
-
-./scistree -v example.dat
-
-Refer to the user manual for more details on how to use ScisTree.
-About sequence reads
-
-A frequently asked question is how to deal with single cell sequence reads in order to use ScisTree. For your convenience, I have created a simple example with detailed instructions. To try this, you should download and unzip the two zipped files called SeqReadsTest.tar.gz and SeqReadsTest-sortbam.tar.gz. Unzipped these files and move the sorted bam files to the directory "SeqReadsTest". Then follow the instructions given in README.txt. It should be easy to try it out. Note: you will need the program Monovar and samtools to run the example. I would suggest you to first install and try to run Monovar before running this tuotiral.
-
-August 29, 2019: I was told the script "dumpCellReadCounts.awk" was missing from the distribution. Use "convMonovarOutputToAlleleCounts.awk" instead.
-Code release, May 28, 2019
-
-Current version is v.1.2.0.6. The source code is in the file ScisTree-ver1.2.0.6-src.zip. There are sevreal changes since the previous release. First the input format is changed to allow user to specify cell and site names. Also, a main change in this code release is that ScisTree now allows to discard some genotypes when constructing initial trees. Simulation shows that this can be useful when data contains significant noise. In this case, using only more reliable genotypes can improve the quality of initial trees.
-
-I have released the source code of ScisTree. To build it, simply de-compress it and then type "make" from the source code directory. That should be all you need.
