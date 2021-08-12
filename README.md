@@ -3,7 +3,7 @@ Inference of population admixture network from local gene genealogies under coal
 
 GTmix is a computer program for inferring population admixture networks from inferred local gene genealogies. If you use GTmix, please cite:
 
-Inference of Population Admixture Network from Local Gene Genealogies: a Coalescent-based Maximum Likelihood Approach, Yufeng Wu, manuscript, 2019.
+Inference of Population Admixture Network from Local Gene Genealogies: a Coalescent-based Maximum Likelihood Approach, Yufeng Wu, Bioinformatics, Volume 36, Issue Supplement_1, July 2020, Pages i326–i334, https://doi.org/10.1093/bioinformatics/btaa465.
 
 Population admixture network is a model for population evolution. Admixture network models population divergence and admixture. Existing methods for inferring population admixture network includes TreeMix (Pickrell and Pritchard, 2012).
 
