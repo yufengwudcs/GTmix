@@ -13,15 +13,25 @@ The key feature of GTmix is that it works with local gene genealogies inferred f
 There are two files needed to run GTmix. First, you need a file containing the local gene genealogies. Here is what is in the given example file (test-mat-2.hap.trees):
 
 0       ((((2,6),8),(1,5)),((4,7),3))
+
 1       ((((((1,7),3),(2,6)),5),8),4)
+
 2       (((((1,5),7),(2,8)),6),(3,4))
+
 3       (((((1,5),3),7),((6,8),2)),4)
+
 4       (((((1,5),3),7),((6,8),2)),4)
+
 5       (((((1,5),(2,4)),7),(6,8)),3)
+
 6       ((((1,5),7),(2,4)),((6,8),3))
+
 7       ((((1,5),2),((4,7),3)),(6,8))
+
 8       (((((6,8),1),4),((2,5),7)),3)
+
 9       ((((6,8),1),(3,7)),((2,5),4))
+
 10      ((((2,5),4),7),(((6,8),1),3))
 
 Note that the first column (index from 0 to 10) is optional; it is included here mainly because we use the program RENT+ to infer the gene genealogies; RENT+ outputs a tree index in its genealogy inference output. 
@@ -29,8 +39,11 @@ Note that the first column (index from 0 to 10) is optional; it is included here
 The second file you need is a file describing the sampled haplotypes and populations. For example, here is what is in the given example file (listPopInfo-p4-a2.txt):
 
 A 2 1 2 
+
 B 2 3 4 
+
 C 2 5 6 
+
 D 2 7 8
 
 Here, each population is one row. The first column specifies the population name. The second column is the number of sampled haplotypes in the population. The following columns specify the haplotypes for this population (should match the taxa in the genealogies).
