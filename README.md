@@ -46,10 +46,10 @@ Refer to the user manual for more details on how to use GTmix.
 ## Source code release (Jan. 13, 2022)
 The source code of GTmix has been released (file: GTmix-ver1.3.0.5-src.tar). To build GTmix from source, you only need to (i) decompress the source code, and (ii) type "make" under the source code directory. That should be all you need (assuming your computer is not too old). GTmix has literally no dependency.
 
-## Tutorial on running GTmix on simulated data
+# Tutorial on running GTmix on simulated data
 Now that you have got GTmix to run on the provided data, I guess you may want to try it with real genetic data. I highly recommend you to first experiment with simulated data first. To help you get started with GTmix, I have prepared the following tutorial.
 ### Things you need for the tutorial
-- Download the tutorial file and decompress it and cd to this directory
+- Download the tutorial file (GTmix-tutorial.zip) and decompress it and cd to this directory
 - Create a link (or copy the executable) of GTmix in the tutorial directory
 - Create a link to the TreePicker utility in the tutorial directory (that works for your computer). You can build the executable if you want or just copy the proper executable (use the right OS pre-built version; for me, it is Mac).
 - Use sh/bash shell in your command line environment
@@ -111,4 +111,16 @@ B 4 5 6 7 8
 C 4 9 10 11 12  
 D 4 13 14 15 16  
 E 4 17 18 19 20  
-Note there is a simple mapping between numerical population number to alphabetic number: 1->A, 2->B, 3->C, 4->D, 5->E (outgroup). Running GTmix is not super fast; it should take about a couple of minutes or less. 
+Note there is a simple mapping between numerical population number to alphabetic number: 1->A, 2->B, 3->C, 4->D, 5->E (outgroup). Running GTmix is not super fast; it should take about a couple of minutes or less. By default, GTmix assumes a single admixture. You can speficy a different number (check the user manual).
+
+#### Interpreting the results
+First thing to note is what population(s) is admixed. Now look at the output: 
+Admixture population: B\
+which agrees with the simulated network: the second population is admixed. GTmix also outputs two population trees contained in the inferred network:
+[0.432092] (E:0.641165,((C:0.194904,D:0.189140):0.090975,(A:0.141690,B:0.086315):0.138844):0.275980)\
+[0.567908] (E:0.641165,(B:0.181085,(A:0.280533,(C:0.194904,D:0.189140):0.090975):0.105796):0.170184)\
+which also agrees exactly with the simulated network. Note: the floating number of each population tree corresponds to the admixture proportion. You can see the admixture proportion is fairly close to 0.5 (the true simulated admixture proportion). 
+
+GTmix also outputs the inferred network in the graph format (in GML format) in the file: optimal-network.gml. You can visualize the graph usiing a GML viewer. 
+
+Please feel free to contact me by email or simply posting issues in GitHub (preferred) if you have further questions.
