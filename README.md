@@ -12,38 +12,25 @@ The key feature of GTmix is that it works with local gene genealogies inferred f
 ## Input files
 There are two files needed to run GTmix. First, you need a file containing the local gene genealogies. Here is what is in the given example file (test-mat-2.hap.trees). BTW, Don't leave empty rows in input files.
 
-0       ((((2,6),8),(1,5)),((4,7),3))
-
-1       ((((((1,7),3),(2,6)),5),8),4)
-
-2       (((((1,5),7),(2,8)),6),(3,4))
-
-3       (((((1,5),3),7),((6,8),2)),4)
-
-4       (((((1,5),3),7),((6,8),2)),4)
-
-5       (((((1,5),(2,4)),7),(6,8)),3)
-
-6       ((((1,5),7),(2,4)),((6,8),3))
-
-7       ((((1,5),2),((4,7),3)),(6,8))
-
-8       (((((6,8),1),4),((2,5),7)),3)
-
-9       ((((6,8),1),(3,7)),((2,5),4))
-
+0       ((((2,6),8),(1,5)),((4,7),3))  
+1       ((((((1,7),3),(2,6)),5),8),4)  
+2       (((((1,5),7),(2,8)),6),(3,4))  
+3       (((((1,5),3),7),((6,8),2)),4)  
+4       (((((1,5),3),7),((6,8),2)),4)  
+5       (((((1,5),(2,4)),7),(6,8)),3)  
+6       ((((1,5),7),(2,4)),((6,8),3))  
+7       ((((1,5),2),((4,7),3)),(6,8))  
+8       (((((6,8),1),4),((2,5),7)),3)  
+9       ((((6,8),1),(3,7)),((2,5),4))  
 10      ((((2,5),4),7),(((6,8),1),3))
 
 Note that the first column (index from 0 to 10) is optional; it is included here mainly because we use the program RENT+ to infer the gene genealogies; RENT+ outputs a tree index in its genealogy inference output. 
 
 The second file you need is a file describing the sampled haplotypes and populations. For example, here is what is in the given example file (listPopInfo-p4-a2.txt):
 
-A 2 1 2 
-
-B 2 3 4 
-
-C 2 5 6 
-
+A 2 1 2  
+B 2 3 4  
+C 2 5 6   
 D 2 7 8
 
 Here, each population is one row. The first column specifies the population name. The second column is the number of sampled haplotypes in the population. The following columns specify the haplotypes for this population (should match the taxa in the genealogies).
@@ -67,5 +54,34 @@ Now that you have got GTmix to run on the provided data, I guess you may want to
 ## Things you need for the tutorial
 - Download the tutorial file and decompress it and cd to this directory
 - Create a link (or copy the executable) of GTmix in the tutorial directory
-- Create a link to the TreePicker utility in the tutorial directory (that works for your computer)
+- Create a link to the TreePicker utility in the tutorial directory (that works for your computer). You can build the executable if you want or just copy the proper executable (use the right OS pre-built version; for me, it is Mac).
+- Use sh/bash shell in your command line environment
 
+## Walk through the tutorial
+You can now try to run GTmix on the provided haplotypes by simply typing (you may need to use chmod +x gtmix-tuotiral.sh first):
+
+./gtmix-tuotiral.sh
+
+You should expect the script starts to run and dump out informative lines such as:
+
+STEP ONE: infer local trees from haplotypes\
+Data 1\
+Data 2\
+..\
+STEP TWO: pick local trees from each locus to form the tree files to GTmix\
+Data 1\
+Data 2\
+..\
+STEP THREE: finally run GTmix\
+*** GTMix ver. 1.3.0.5, October 30, 2019 ***\
+
+Number of gene trees to use: 50\
+Scaffold tree: (B:1.770781,(A:3.723438,(E:4.211563,(C:3.716250,D:3.661250):0.248437):0.139688):1.770781)\
+****** Highest log-probabiliyt of optimized network (searching over network space): -4688.49\
+Time needed to find the optimal network: 112\
+Optimal network: output to file: optimal-network.gml\
+List of marginal trees in the optimal network:\
+[0.432092] (E:0.641165,((C:0.194904,D:0.189140):0.090975,(A:0.141690,B:0.086315):0.138844):0.275980)\
+[0.567908] (E:0.641165,(B:0.181085,(A:0.280533,(C:0.194904,D:0.189140):0.090975):0.105796):0.170184)\
+Admixture population: B\
+Elapsed time = 112 seconds.\
