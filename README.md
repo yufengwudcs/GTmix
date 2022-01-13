@@ -43,9 +43,6 @@ This would infer a population admixture network based on maximum likelihood. The
 
 Refer to the user manual for more details on how to use GTmix.
 
-### Preprocessing
-The number of local genealogies inferred by RENT+ can be large. It may be necessary to choose a subset of local genealogies for inferring admixture networks. I recommend to use TreePicker I wrote for choosing a subset of trees. Check out the README file for more information on how to run RENT+ (Java exectuable included) and TreePicker.
-
 ## Source code release (Jan. 13, 2022)
 The source code of GTmix has been released (file: GTmix-ver1.3.0.5-src.tar). To build GTmix from source, you only need to (i) decompress the source code, and (ii) type "make" under the source code directory. That should be all you need (assuming your computer is not too old). GTmix has literally no dependency.
 
@@ -92,5 +89,26 @@ Let us try to make sense about what the tutorial is about.
 #### Data
 The data in 20x50x50x50-4p4a-og-t0.1.net3.1.trace was simulated using Hudson's ms. Take a look at the first row of this file:  
 ./ms 20 50 -t 50 -r 50 500000 -I 5 4 4 4 4 4 -es 0.02 2 0.5 -ej 0.04 2 1 -ej 0.06 4 3 -ej 0.08 3 1 -ej 0.10 6 1 -ej 0.20 5 1  
-I assume you have used ms before. Otherwise you will need to read the manual of ms to make sense of this command line. Briefly, we are generating haplotypes for 50 loci, each with 20 haplotypes; there are five populations, each with four haplotypes. The second population (population 2) is admixed; one ancestral population  of 2 and population 1 split from an ancestral population (G), which splits from the ancestral population (H) of populations 3 and 4 (which are children of H) at an ancestral population I; finally, the second ancestral population of 2 splits from I; E is the outgroup. This is shown in this figure. 
+I assume you have used ms before. Otherwise you will need to read the manual of ms to make sense of this command line. Briefly, we are generating haplotypes for 50 loci, each with 20 haplotypes; there are five populations, each with four haplotypes. The second population (population 2) is admixed; one ancestral population  of 2 and population 1 split from an ancestral population (G), which splits from the ancestral population (H) of populations 3 and 4 (which are children of H) at an ancestral population I; finally, the second ancestral population of 2 splits from I; E is the outgroup. This is shown in this figure:
 ![Simulated admixture network](https://github.com/yufengwudcs/GTmix/edit/master/AdmixNet3-github-tutorial.png?raw=true)
+
+#### Step one: reconstruct local trees
+Now we have haplotypes (in 20x50x50x50-4p4a-og-t0.1.net3.1.trace, as simulated by ms). GTmix doesn't directly work with haplotypes. Instead, it works with inferred gene genealogies from haplotypes. Thus we first reconstruct genealogies from haplotypes. GTmix uses RENT+ for this purpose. RENT+ takes a specific input format; check [RENT+](https://github.com/SajadMirzaei/RentPlus) for more information. For your convenience, data format conversion is taken care of by severl simple scripts (written in AWK). Basically, the automated script (in gtmix-tuotiral.sh) simply extracts haplotypes from each locus one by one and infer the genealogies for each locus. This is because RENT+ works with data from a single locus each time. 
+
+#### Step two: choosing local trees for GTmix
+The number of local genealogies inferred by RENT+ can be large. It is usually necessary to choose a subset of local genealogies for inferring admixture networks. Note: this is not just for efficiency but also for accuracy; nearby local trees are tightly correlated; GTmix assumes each genealogy is independent; moreover, genealogies from different loci provide more information about admixture network than those from the same locus. Thus, I strongly recommend you to consider using haplotypes from multiple loci for the inference of admixture networks (if you only use data from a single locus, results can be pretty bad).
+
+I recommend to use TreePicker I wrote for choosing a subset of trees (say one or multiple, depending on the size of the locus) from the inferred genealogies of each locus. In this tutorial, I only use a single tree out of many trees inferred at each locus. You can certainly try to use more. However, don't use all the inferred genealogies at a locus: these trees are often highly redundent.
+
+One thing to note is that TreePicker requires a haplotype file to work with. The haplotype file contains all the haplotypes at a locus. The haplotype file is in the exact format as that is used by RENT+. 
+
+You would create a single file containing all chosen trees from all (50) loci. Since we choose one tree per locus, there would be 50 trees in the chosen tree file (tmp.treeschosen-20x50x50x50-4p4a-og-t0.1.net3.1.trace.trees). Open this file to ensure there are 50 trees (in Newick format) in this file.
+
+#### Step three: run GTmix
+Now we run GTmix on the chosen tree file. You need a new population file as follows:
+A 4 1 2 3 4  
+B 4 5 6 7 8  
+C 4 9 10 11 12  
+D 4 13 14 15 16  
+E 4 17 18 19 20  
+Note there is a simple mapping between numerical population number to alphabetic number: 1->A, 2->B, 3->C, 4->D, 5->E (outgroup). Running GTmix is not super fast; it should take about a couple of minutes or less. 
