@@ -9,7 +9,7 @@ Population admixture network is a model for population evolution. Admixture netw
 
 The key feature of GTmix is that it works with local gene genealogies inferred from haplotypes. Existing methods for admixture network inference (e.g., Treemix) uses single-site genetic variations. While these methods are very fast, they may lose important linkage disequilibrum (LD) information. GTmix works with inferred local gene genealogies from haplotypes. Local genealogies contain LD information. GTmix performs maximum likelihood inference of admixture networks from local genealogies based on the so-called "multispecies coalescent" model. My tests show that GTmix is slower than TreeMix. However, GTmix can infer more accurate networks than TreeMix even when GTmix only uses a small fraction of data compared to those used by TreeMix.
 
-# Input files
+## Input files
 There are two files needed to run GTmix. First, you need a file containing the local gene genealogies. Here is what is in the given example file (test-mat-2.hap.trees). BTW, Don't leave empty rows in input files.
 
 0       ((((2,6),8),(1,5)),((4,7),3))
@@ -59,6 +59,13 @@ Refer to the user manual for more details on how to use GTmix.
 # Preprocessing
 The number of local genealogies inferred by RENT+ can be large. It may be necessary to choose a subset of local genealogies for inferring admixture networks. I recommend to use TreePicker I wrote for choosing a subset of trees. Check out the README file for more information on how to run RENT+ (Java exectuable included) and TreePicker.
 
-# Source code release (Jan. 13, 2022)
+## Source code release (Jan. 13, 2022)
 The source code of GTmix has been released (file: GTmix-ver1.3.0.5-src.tar). To build GTmix from source, you only need to (i) decompress the source code, and (ii) type "make" under the source code directory. That should be all you need (assuming your computer is not too old). GTmix has literally no dependency.
+
+# Tutorial on running GTmix on simulated data
+Now that you have got GTmix to run on the provided data, I guess you may want to try it with real genetic data. I highly recommend you to first experiment with simulated data first. To help you get started with GTmix, I have prepared the following tutorial.
+## Things you need for the tutorial
+#### Download the tutorial file and decompress it and cd to this directory
+#### Create a link (or copy the executable) of GTmix in the tutorial directory
+#### Create a link to the TreePicker utility in the tutorial directory (that works for your computer)
 
