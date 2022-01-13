@@ -65,7 +65,7 @@ The source code of GTmix has been released (file: GTmix-ver1.3.0.5-src.tar). To 
 # Tutorial on running GTmix on simulated data
 Now that you have got GTmix to run on the provided data, I guess you may want to try it with real genetic data. I highly recommend you to first experiment with simulated data first. To help you get started with GTmix, I have prepared the following tutorial.
 ## Things you need for the tutorial
-#### Download the tutorial file and decompress it and cd to this directory
-#### Create a link (or copy the executable) of GTmix in the tutorial directory
-#### Create a link to the TreePicker utility in the tutorial directory (that works for your computer)
+- Download the tutorial file and decompress it and cd to this directory
+- Create a link (or copy the executable) of GTmix in the tutorial directory
+- Create a link to the TreePicker utility in the tutorial directory (that works for your computer)
 
