@@ -60,5 +60,5 @@ Refer to the user manual for more details on how to use GTmix.
 The number of local genealogies inferred by RENT+ can be large. It may be necessary to choose a subset of local genealogies for inferring admixture networks. I recommend to use TreePicker I wrote for choosing a subset of trees. Check out the README file for more information on how to run RENT+ (Java exectuable included) and TreePicker.
 
 # Source code release (Jan. 13, 2022)
-The source code of GTmix sometime has been released. To build GTmix from source, you only need to (i) decompress the source code, and (ii) type "make" under the source code directory. That should be all you need (assuming your computer is not too old). GTmix has literally no dependency.
+The source code of GTmix has been released (file: GTmix-ver1.3.0.5-src.tar). To build GTmix from source, you only need to (i) decompress the source code, and (ii) type "make" under the source code directory. That should be all you need (assuming your computer is not too old). GTmix has literally no dependency.
 
